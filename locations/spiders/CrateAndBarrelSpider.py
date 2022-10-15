@@ -13,9 +13,11 @@ class TalbotsSpider(CrawlSpider):
     start_urls = ["https://www.crateandbarrel.com/stores/list-state/retail-stores"]
     rules = [
         Rule(
-            LinkExtractor(allow=r"stores\/list-state\/retail-stores\/([a-zA-Z]{2})$"), callback="parse"
+            LinkExtractor(allow=r"stores\/list-state\/retail-stores\/([a-zA-Z]{2})$"),
+            callback="parse",
         )
     ]
+
     def parse(self, response):
         for ldjson in response.xpath(
             "//script[@type='application/ld+json' and contains(text(), '@type:Store')]/text()"
